@@ -1,0 +1,14 @@
+<form method="POST" action="/courses/{{course._id}}?_method=PUT">
+  <div class="form-group">
+    <label for="name">name</label>
+    <input type="text" name="name" value="{{course.name}}"class="form-control" id="name" aria-describedby="emailHelp" placeholder="name">
+     <label for="name">description</label>
+    <input type="text" name="desc" value="{{course.desc}}" class="form-control" id="description" aria-describedby="emailHelp" placeholder="description">
+     <label for="name">videoId</label>
+    <input type="text" name="videoId" value="{{course.videoId}}" class="form-control" id="videoId" aria-describedby="emailHelp" placeholder="videoId">
+     <label for="name">level</label>
+    <input type="text" name="level" class="form-control" value="{{course.level}}" id="level" aria-describedby="emailHelp" placeholder="level">
+
+  </div>
+  <button type="submit" class="btn btn-primary">Cap nhat</button>
+</form>

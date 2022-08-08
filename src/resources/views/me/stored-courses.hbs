@@ -1,0 +1,68 @@
+<div class="my-5">
+ <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Ten khoa hoc</th>
+      <th scope="col">trinh do</th>
+      <th scope="col">thoi gian</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each courses}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>{{this.name}}</td>
+      <td>{{this.level}}</td>
+      <td>{{this.createdAt}}</td>
+      <td>
+       <a href="/courses/{{this._id}}/edit" class="btn btn-success">sua</a>
+       <a href="/courses/{{this._id}}" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-id="{{this._id}}">xoa</a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
+{{!-- hidden form --}}
+<form method="POST"  name="delete-form"></form>
+{{!-- modal --}}
+<div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xóa khóa học !</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc muốn xóa khóa học này ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-danger" id ="btn-delete">xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  window.addEventListener("DOMContentLoaded",()=>{
+    var courseId;
+    var btnDelete = document.getElementById("btn-delete")
+    var formDelete= document.forms['delete-form']
+    console.log(formDelete)
+    $('#exampleModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) 
+      courseId = button.data('id') 
+    })
+    btnDelete.onclick = function(){
+     formDelete.action = '/courses/'+courseId+'?_method=DELETE'
+     formDelete.submit()
+    }
+  })
+
+</script>
